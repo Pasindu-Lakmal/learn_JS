@@ -96,3 +96,55 @@ console.log(lufthansa);
 const flightData = [583, 'George cooper'];
 book.apply(eurowings, flightData);
 console.log(eurowings);
+
+//bind methods
+const bookEW = book.bind(eurowings);
+
+bookEW(777, 'kamala hasan');
+console.log(eurowings);
+
+const bookEW888 = book.bind(eurowings, 888);
+bookEW888('paman lunara');
+console.log(eurowings);
+
+// bind with Event listner
+lufthansa.planes = 300;
+
+const buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', buyPlane.bind(lufthansa));
+
+const addTax = (rate, value) => value + value * rate;
+
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+//addVAT =(value)=>value+value*0.23;
+
+console.log(addVAT(200));
+
+const tax = (rate = 0.23, value) => value + value * rate;
+
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section!
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    //Get the answer
+    const answer = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
+    //Register answer
+  },
+};
+
+poll.registerNewAnswer();
